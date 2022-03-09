@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  background-color: darkgray;
+}
+
+/* 
+.Login{
+  margin-top: 5%;
+  margin-left: 38%;
+  margin-right: 38%;
+  
+} */
+
+.Login {
+  padding: 60px 0;
+}
+
+.Login form {
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+.Login Button{
+width: 320px;
+}
+
+.Login-Table{
+  margin: 0 auto;
+  max-width: 600px;
+}
+/* 
+.deleteListDiv{
+  margin-top: 55px;
+} */
+
+.Heading{
+  display: flex;
+  justify-content: center;
+  font-family: cursive;
+  font-weight: 1000;
+  margin-bottom: 30px;
+}
+
+.todo-Container{
+  max-width: 70%;
+}
