@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -32,7 +31,16 @@ const TodoPage = () => {
     setNotCompletedTaskList([...notCompletedTaskList, userInput]);
     setUserInput("");
   };
+  
+  const deleteItemFromList=(index)=>{
+    const notCompletedTaskListClone=[...notCompletedTaskList];
+    notCompletedTaskListClone.splice(index,1);
+    setNotCompletedTaskList(notCompletedTaskListClone);
 
+    // const completeTaskListClone=[...completeTaskList];
+    // completeTaskListClone.splice(index,1);
+    // setCompletedTaskList(completeTaskListClone);
+  }
 
   const handleMarkAsCompleted = (index) => {
     const notCompletedTaskListClone = [...notCompletedTaskList]; // Copy state variable
@@ -44,7 +52,11 @@ const TodoPage = () => {
   }
 
   const handleMarkAsNotCompleted = (index) => {
-
+    const completeTaskListClone=[...completeTaskList];
+    const notCompletedTask=completeTaskListClone[index];
+    setNotCompletedTaskList([...notCompletedTaskList,notCompletedTask]);
+    completeTaskListClone.splice(index,1);
+    setCompletedTaskList(completeTaskListClone)
   }
 
   console.log("completeTaskList =>", completeTaskList);
@@ -62,7 +74,6 @@ const TodoPage = () => {
             <InputGroup className="mb-3">
               <FormControl
                 value={userInput}
-                id="textval"
                 onChange={handleTextOnChange}
                 placeholder="Add new todo"
                 aria-label="Recipient's username"
@@ -89,6 +100,7 @@ const TodoPage = () => {
                       index={index}
                       title={todoItem}
                       onSelect={handleMarkAsCompleted}
+                      onDelete={deleteItemFromList}
                     />
                   );
                 })}
@@ -100,12 +112,14 @@ const TodoPage = () => {
             <div className="deleteListDiv">
               <b> Completed Tasks :</b>
               <ListGroup>
-                {completeTaskList.map((todoItem) => {
+                {completeTaskList.map((todoItem,index) => {
                   return (
                     <RowComponent
                       checked={true}
+                      index={index}
                       title={todoItem}
                       onSelect={handleMarkAsNotCompleted}
+                      // onDelete={deleteItemFromList}
                     />
                   );
                 })}
