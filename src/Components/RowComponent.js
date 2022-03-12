@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import CloseButton from "react-bootstrap/CloseButton";
 
-const RowComponent = ({ title, onSelect, index, checked ,onDelete}) => {
+const RowComponent = ({ title, onSelect, index, checked ,onDelete,isCompletedTask}) => {
 
   return (
     <>
@@ -27,7 +27,7 @@ const RowComponent = ({ title, onSelect, index, checked ,onDelete}) => {
               xs={1}
               style={{ display: "flex", justifyContent: "flex-end" }}
             >
-              <CloseButton onClick={()=>onDelete(index)}/>
+              <CloseButton onClick={()=>onDelete(index,checked)}/>
             </Col>
           </Row>
         </div>

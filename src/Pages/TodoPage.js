@@ -9,7 +9,6 @@ import FormLabel from "react-bootstrap/FormLabel";
 import FormControl from "react-bootstrap/FormControl";
 import RowComponent from "../Components/RowComponent";
 
-
 // 1. CompleteTask []
 // 2. Not completed task []
 // 3. New add -> Not completed task
@@ -17,47 +16,48 @@ import RowComponent from "../Components/RowComponent";
 // 5. UnCheck completed -> non completed
 
 const TodoPage = () => {
-
   const [userInput, setUserInput] = useState("");
   const [completeTaskList, setCompletedTaskList] = useState(["Learn Flute"]);
-  const [notCompletedTaskList, setNotCompletedTaskList] = useState(["Done Flute"]);
-
+  const [notCompletedTaskList, setNotCompletedTaskList] = useState([
+    "Done Flute",
+  ]);
 
   const handleTextOnChange = (event) => {
-    setUserInput(event.target.value)
-  }
+    setUserInput(event.target.value);
+  };
 
   const addTodoItem = () => {
     setNotCompletedTaskList([...notCompletedTaskList, userInput]);
     setUserInput("");
   };
-  
-  const deleteItemFromList=(index)=>{
-    const notCompletedTaskListClone=[...notCompletedTaskList];
-    notCompletedTaskListClone.splice(index,1);
-    setNotCompletedTaskList(notCompletedTaskListClone);
 
-    // const completeTaskListClone=[...completeTaskList];
-    // completeTaskListClone.splice(index,1);
-    // setCompletedTaskList(completeTaskListClone);
-  }
+  const deleteItemFromList = (index, isCompletedTask) => {
+    if (isCompletedTask === false) {
+      const notCompletedTaskListClone = [...notCompletedTaskList];
+      notCompletedTaskListClone.splice(index, 1);
+      setNotCompletedTaskList(notCompletedTaskListClone);
+    } else {
+      const completeTaskListClone = [...completeTaskList];
+      completeTaskListClone.splice(index, 1);
+      setCompletedTaskList(completeTaskListClone);
+    }
+  };
 
   const handleMarkAsCompleted = (index) => {
     const notCompletedTaskListClone = [...notCompletedTaskList]; // Copy state variable
     const completedTask = notCompletedTaskListClone[index]; // Get the task which needs to be marked as completed
     setCompletedTaskList([...completeTaskList, completedTask]); // Add to completed task
-    notCompletedTaskListClone.splice(index, 1) // Remove the task from not completed
-    setNotCompletedTaskList(notCompletedTaskListClone)
-
-  }
+    notCompletedTaskListClone.splice(index, 1); // Remove the task from not completed
+    setNotCompletedTaskList(notCompletedTaskListClone);
+  };
 
   const handleMarkAsNotCompleted = (index) => {
-    const completeTaskListClone=[...completeTaskList];
-    const notCompletedTask=completeTaskListClone[index];
-    setNotCompletedTaskList([...notCompletedTaskList,notCompletedTask]);
-    completeTaskListClone.splice(index,1);
-    setCompletedTaskList(completeTaskListClone)
-  }
+    const completeTaskListClone = [...completeTaskList];
+    const notCompletedTask = completeTaskListClone[index];
+    setNotCompletedTaskList([...notCompletedTaskList, notCompletedTask]);
+    completeTaskListClone.splice(index, 1);
+    setCompletedTaskList(completeTaskListClone);
+  };
 
   console.log("completeTaskList =>", completeTaskList);
   console.log("notCompletedTaskList =>", notCompletedTaskList);
@@ -81,7 +81,7 @@ const TodoPage = () => {
               />
               <Button variant="outline-dark" onClick={addTodoItem}>
                 Add
-                </Button>
+              </Button>
             </InputGroup>
           </Col>
           <Col xs={6}></Col>
@@ -97,6 +97,7 @@ const TodoPage = () => {
                   return (
                     <RowComponent
                       checked={false}
+                      isCompletedTask={false}
                       index={index}
                       title={todoItem}
                       onSelect={handleMarkAsCompleted}
@@ -112,14 +113,15 @@ const TodoPage = () => {
             <div className="deleteListDiv">
               <b> Completed Tasks :</b>
               <ListGroup>
-                {completeTaskList.map((todoItem,index) => {
+                {completeTaskList.map((todoItem, index) => {
                   return (
                     <RowComponent
                       checked={true}
+                      isCompletedTask={true}
                       index={index}
                       title={todoItem}
                       onSelect={handleMarkAsNotCompleted}
-                      // onDelete={deleteItemFromList}
+                      onDelete={deleteItemFromList}
                     />
                   );
                 })}
@@ -127,7 +129,6 @@ const TodoPage = () => {
             </div>
           </Col>
         </Row>
-
       </Container>
     </Fragment>
   );
