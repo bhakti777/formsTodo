@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import CloseButton from "react-bootstrap/CloseButton";
 
-const NewRowComponent = ({newListDetails}) => {
+const NewRowComponent = ({ newListDetails }) => {
 
   return (
     <>
@@ -23,7 +23,7 @@ const NewRowComponent = ({newListDetails}) => {
               xs={1}
               style={{ display: "flex", justifyContent: "flex-end" }}
             >
-              <CloseButton/>
+              <CloseButton />
             </Col>
           </Row>
         </div>

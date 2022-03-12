@@ -8,40 +8,45 @@ import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
 import ListGroup from "react-bootstrap/ListGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import PopupComponent from "../Components/PopupComponent";
 import FormPopupComponent from "../Components/FormPopupComponent";
 import NewRowComponent from "../Components/NewRowComponent";
 
 const TodoApplication = () => {
   const [popup, setPopup] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleTogglePopup = () => {
-    setPopup(!popup);
+    setShow(!show);
   };
 
-//   const initialState = {
-//     taskName: "",
-//     assignedTo: "",
-//     dueDate: "",
-//     description: "",
-//   };
+  //   const initialState = {
+  //     taskName: "",
+  //     assignedTo: "",
+  //     dueDate: "",
+  //     description: "",
+  //   };
 
-//   //To add new Row 
-// // const [newInputs,setNewInputs]=useState("")
+  //   //To add new Row 
+  // // const [newInputs,setNewInputs]=useState("")
 
-//   const [formInput, setFormInput] = useState(initialState);
-  const [notCompletedList,setNotCompletedList]=useState(['Do Homework']);
-  const [completedList,setCompletedList]=useState(['Done Exercise']);
+  //   const [formInput, setFormInput] = useState(initialState);
+  const [notCompletedList, setNotCompletedList] = useState(['Do Homework']);
+  const [completedList, setCompletedList] = useState(['Done Exercise']);
 
-//   const handleOnChange = (event) => {
-//     setFormInput({ ...formInput, [event.target.name]: event.target.value });
-//     console.log(event.target.name, event.target.value);
-//   };
+  //   const handleOnChange = (event) => {
+  //     setFormInput({ ...formInput, [event.target.name]: event.target.value });
+  //     console.log(event.target.name, event.target.value);
+  //   };
 
-//   const addNewList=()=>{
-//     setNotCompletedList([...notCompletedList,formInput]);
-//     setFormInput(initialState);
-//     console.log(notCompletedList)
-//   }
+  //   const addNewList=()=>{
+  //     setNotCompletedList([...notCompletedList,formInput]);
+  //     setFormInput(initialState);
+  //     console.log(notCompletedList)
+  //   }
 
   return (
     <Fragment>
@@ -84,7 +89,7 @@ const TodoApplication = () => {
             <Button
               variant="success"
               style={{ display: "flex", justifyContent: "left" }}
-              onClick={handleTogglePopup}
+              onClick={handleShow}
             >
               + New list
             </Button>
@@ -106,35 +111,46 @@ const TodoApplication = () => {
         </Row>
       </div>
 
-      <div className="todoFormPopup-margin">
+      {/* <div className="todoFormPopup-margin">
         {popup && (
           <FormPopupComponent
             onCancel={handleTogglePopup}
-            // onInputChange={handleOnChange}
-            // onPressAdd={addNewList}
+          // onInputChange={handleOnChange}
+          // onPressAdd={addNewList}
           />
         )}
-      </div>
+      </div> */}
+
+
+      {show && <PopupComponent
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
+        existingList={notCompletedList}
+        setIntoList={setNotCompletedList} />}
 
       <div className="todoAppli-display">
-      <Row>
-          <Col xs={12}>
-              <b>Not-Completed Tasks :</b>
-              <ListGroup>
-                {<NewRowComponent newListDetails={notCompletedList}/>}
-              </ListGroup> 
-          </Col>
-        </Row>
-       
-       
         <Row>
           <Col xs={12}>
-              <b> Completed Tasks :</b>
-              <ListGroup>
-              {<NewRowComponent newListDetails={completedList}/>}
-              </ListGroup>
+            <b>Not-Completed Tasks :</b>
+            <ListGroup>
+              {notCompletedList && notCompletedList.map((item) => {
+                return <NewRowComponent newListDetails={item} />
+              })}
+
+            </ListGroup>
           </Col>
         </Row>
+
+        {/* 
+        <Row>
+          <Col xs={12}>
+            <b> Completed Tasks :</b>
+            <ListGroup>
+              {<NewRowComponent newListDetails={completedList} />}
+            </ListGroup>
+          </Col>
+        </Row> */}
       </div>
     </Fragment>
   );

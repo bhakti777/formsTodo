@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const FormPopupComponent = ({ onCancel, onInputChange,onPressAdd,formInput}) => {
+const FormPopupComponent = ({ onCancel, onInputChange, onPressAdd, formInput }) => {
   return (
     <div className="card">
 
@@ -25,8 +25,8 @@ const FormPopupComponent = ({ onCancel, onInputChange,onPressAdd,formInput}) => 
                     type="text"
                     placeholder="Enter task name"
                     name="taskName"
-                    // value={formInput.taskName}
-                    // onChange={onInputChange}
+                  // value={formInput.taskName}
+                  // onChange={onInputChange}
                   />
                 </Col>
 
@@ -38,8 +38,8 @@ const FormPopupComponent = ({ onCancel, onInputChange,onPressAdd,formInput}) => 
                     type="text"
                     placeholder=""
                     name="assignedTo"
-                    // value={formInput.assignedTo}
-                    // onChange={onInputChange}
+                  // value={formInput.assignedTo}
+                  // onChange={onInputChange}
                   />
                 </Col>
 
@@ -50,8 +50,8 @@ const FormPopupComponent = ({ onCancel, onInputChange,onPressAdd,formInput}) => 
                   <Form.Control
                     type="date"
                     name="dueDate"
-                    //  value={formInput.dueDate}
-                    // onChange={onInputChange}
+                  //  value={formInput.dueDate}
+                  // onChange={onInputChange}
                   />
                 </Col>
 
@@ -63,8 +63,8 @@ const FormPopupComponent = ({ onCancel, onInputChange,onPressAdd,formInput}) => 
                     as="textarea"
                     placeholder="Write description"
                     name="description"
-                    //  value={formInput.description}
-                    // onChange={onInputChange}
+                  //  value={formInput.description}
+                  // onChange={onInputChange}
                   />
                 </Col>
               </Form.Group>
@@ -77,12 +77,13 @@ const FormPopupComponent = ({ onCancel, onInputChange,onPressAdd,formInput}) => 
           <Button
             variant="success"
             style={{ marginLeft: "10px" }}
-            // onClick={onPressAdd}
+          // onClick={onPressAdd}
           >
             Add
           </Button>
         </Card.Body>
       </Card>
+
     </div>
   );
 };
