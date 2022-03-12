@@ -6,8 +6,10 @@ import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
+import ListGroup from "react-bootstrap/ListGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import FormPopupComponent from "../Components/FormPopupComponent";
+import NewRowComponent from "../Components/NewRowComponent";
 
 const TodoApplication = () => {
   const [popup, setPopup] = useState(false);
@@ -16,17 +18,30 @@ const TodoApplication = () => {
     setPopup(!popup);
   };
 
-  // const initialState = {
-  //   taskName: "",
-  //   assignedTo: "",
-  //   dueDate: "",
-  //   description: "",
-  // };
-  // const [formState, setFormState] = useState(initialState);
-  // const handleOnChange = (event) => {
-  //   setFormState({ ...formState, [event.target.name]: event.target.value });
-  //   console.log(event.target.name, event.target.value);
-  // };
+//   const initialState = {
+//     taskName: "",
+//     assignedTo: "",
+//     dueDate: "",
+//     description: "",
+//   };
+
+//   //To add new Row 
+// // const [newInputs,setNewInputs]=useState("")
+
+//   const [formInput, setFormInput] = useState(initialState);
+  const [notCompletedList,setNotCompletedList]=useState(['Do Homework']);
+  const [completedList,setCompletedList]=useState(['Done Exercise']);
+
+//   const handleOnChange = (event) => {
+//     setFormInput({ ...formInput, [event.target.name]: event.target.value });
+//     console.log(event.target.name, event.target.value);
+//   };
+
+//   const addNewList=()=>{
+//     setNotCompletedList([...notCompletedList,formInput]);
+//     setFormInput(initialState);
+//     console.log(notCompletedList)
+//   }
 
   return (
     <Fragment>
@@ -76,7 +91,6 @@ const TodoApplication = () => {
           </Col>
 
           <Col xs={6} style={{ display: "flex", justifyContent: "center" }}>
-            <h3></h3>
           </Col>
 
           <Col>
@@ -96,12 +110,32 @@ const TodoApplication = () => {
         {popup && (
           <FormPopupComponent
             onCancel={handleTogglePopup}
-            // onChange={handleOnChange}
+            // onInputChange={handleOnChange}
+            // onPressAdd={addNewList}
           />
         )}
       </div>
 
-      <div></div>
+      <div className="todoAppli-display">
+      <Row>
+          <Col xs={12}>
+              <b>Not-Completed Tasks :</b>
+              <ListGroup>
+                {<NewRowComponent newListDetails={notCompletedList}/>}
+              </ListGroup> 
+          </Col>
+        </Row>
+       
+       
+        <Row>
+          <Col xs={12}>
+              <b> Completed Tasks :</b>
+              <ListGroup>
+              {<NewRowComponent newListDetails={completedList}/>}
+              </ListGroup>
+          </Col>
+        </Row>
+      </div>
     </Fragment>
   );
 };
