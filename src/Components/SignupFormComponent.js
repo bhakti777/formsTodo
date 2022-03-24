@@ -28,8 +28,6 @@ const SignupFormComponent = ({ setUsers, users }) => {
         setFormState(initialState);
     };
 
-
-
     return (
 
         <div className="signupformmargin">

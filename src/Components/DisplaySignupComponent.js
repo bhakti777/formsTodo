@@ -12,14 +12,10 @@ const DisplaySignupComponent = ({ formDetails, onDelete, handleOnCheck, handleFi
   }
 
   const handleEnterEvent = (event) => {
-    console.log("event =>", event.key)
     if (event.key == 'Enter') {
       handleFilter(searchQuery);
     }
   }
-
-
-  console.log("Search Query =>", searchQuery);
 
 
   return (

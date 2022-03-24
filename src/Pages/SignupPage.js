@@ -51,8 +51,6 @@ const SignupPage = () => {
       setUsers(filteredUsers)
     }
 
-
-
   }
 
   const handleOnDelete = (indexToDelete) => {
@@ -61,21 +59,18 @@ const SignupPage = () => {
     setUsers(usersClone);
   };
 
-
   const handleOnCheck = (index) => {
     const usersClone = [...users];
     if (usersClone[index].isSelected == true) {
-      console.log("==IN TRUE  ==");
       usersClone[index].isSelected = false;
-
     } else {
-      console.log("== IN FALSE NEW ==");
       usersClone[index].isSelected = true;
     }
     setUsers(usersClone);
     return
-
   };
+
+
   return (
     <>
       <HeaderComponent />
