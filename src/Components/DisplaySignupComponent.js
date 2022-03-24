@@ -1,10 +1,30 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import Form from "react-bootstrap/Form";
 import CloseButton from "react-bootstrap/CloseButton";
 import Table from "react-bootstrap/Table";
 
-const DisplaySignupComponent = ({ formDetails, onDelete, checked, handleOnCheck,setChecked}) => {
+const DisplaySignupComponent = ({ formDetails, onDelete, handleOnCheck, handleFilter }) => {
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleOnChange = (event) => {
+    setSearchQuery(event.target.value)
+  }
+
+  const handleEnterEvent = (event) => {
+    console.log("event =>", event.key)
+    if (event.key == 'Enter') {
+      handleFilter(searchQuery);
+    }
+  }
+
+
+  console.log("Search Query =>", searchQuery);
+
+
   return (
     <Fragment>
+      <Form.Control onKeyPress={handleEnterEvent} value={searchQuery} onChange={handleOnChange} type="text" placeholder="Search Email..." style={{ marginBottom: "10px" }} />
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -23,10 +43,11 @@ const DisplaySignupComponent = ({ formDetails, onDelete, checked, handleOnCheck,
           {formDetails &&
             formDetails.map((user, index) => {
               return (
-                <tr key={index} className={user.isSelected===true?"changecolor":""}>
+                <tr key={index} className={user.isSelected === true ? "changecolor" : ""}>
                   <td>
                     <input
                       type="checkbox"
+                      checked={user.isSelected}
                       onClick={() => handleOnCheck(index)}
                       className="changecolor"
                     />
