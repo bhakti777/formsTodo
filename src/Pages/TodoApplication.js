@@ -13,40 +13,21 @@ import FormPopupComponent from "../Components/FormPopupComponent";
 import NewRowComponent from "../Components/NewRowComponent";
 
 const TodoApplication = () => {
-  const [popup, setPopup] = useState(false);
+  // const [popup, setPopup] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+//or
+  // const handleTogglePopup = () => {
+  //   setShow(!show);
+  // };
 
-  const handleTogglePopup = () => {
-    setShow(!show);
-  };
-
-  //   const initialState = {
-  //     taskName: "",
-  //     assignedTo: "",
-  //     dueDate: "",
-  //     description: "",
-  //   };
-
-  //   //To add new Row 
-  // // const [newInputs,setNewInputs]=useState("")
-
-  //   const [formInput, setFormInput] = useState(initialState);
+  
   const [notCompletedList, setNotCompletedList] = useState(['Do Homework']);
   const [completedList, setCompletedList] = useState(['Done Exercise']);
 
-  //   const handleOnChange = (event) => {
-  //     setFormInput({ ...formInput, [event.target.name]: event.target.value });
-  //     console.log(event.target.name, event.target.value);
-  //   };
-
-  //   const addNewList=()=>{
-  //     setNotCompletedList([...notCompletedList,formInput]);
-  //     setFormInput(initialState);
-  //     console.log(notCompletedList)
-  //   }
+  
 
   return (
     <Fragment>
@@ -110,16 +91,6 @@ const TodoApplication = () => {
           </Col>
         </Row>
       </div>
-
-      {/* <div className="todoFormPopup-margin">
-        {popup && (
-          <FormPopupComponent
-            onCancel={handleTogglePopup}
-          // onInputChange={handleOnChange}
-          // onPressAdd={addNewList}
-          />
-        )}
-      </div> */}
 
 
       {show && <PopupComponent
